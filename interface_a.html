@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Response — Interface A</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f2f5;
+      --surface: #ffffff;
+      --border: #d0d5dd;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-label: #6b7280;
+      --accent: #2d6a4f;
+      --accent-light: #e8f4ee;
+      --radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.09);
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── Header ── */
+    .header {
+      width: 100%;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .study-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .study-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .header h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Scenario card ── */
+    .scenario-card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      margin-bottom: 10px;
+    }
+
+    .scenario-text {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    /* ── Response card ── */
+    .response-card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+
+    .response-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--border);
+      background: #fafaf8;
+    }
+
+    .ai-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ai-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    .response-header-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .response-header-sub {
+      font-size: 12px;
+      color: var(--text-label);
+    }
+
+    .response-body {
+      padding: 28px;
+    }
+
+    .response-body p {
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--text-primary);
+      margin-bottom: 18px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 400;
+    }
+
+    .response-body p:last-child {
+      margin-bottom: 0;
+    }
+
+    /* ── Return button ── */
+    .return-section {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+    }
+
+    .return-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 32px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(45,106,79,0.25);
+    }
+
+    .return-btn:hover {
+      background: #235c41;
+      transform: translateY(-1px);
+    }
+
+    .return-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    .return-hint {
+      font-size: 13px;
+      color: var(--text-label);
+      margin-top: 12px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .response-body { padding: 20px; }
+      .scenario-card { padding: 20px; }
+      .response-body p { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="study-badge">Response A</div>
+    <h1>Response A</h1>
+    <p>Please read the response below carefully. After reviewing it, return to the survey to answer the questions.</p>
+  </div>
+
+  <!-- Scenario -->
+  <div class="scenario-card">
+    <div class="card-label">Scenario</div>
+    <p class="scenario-text">
+      You are a graduate student with ADHD who has been struggling to keep up with 
+      coursework in a seminar. You want to do well, but you keep missing readings and 
+      submitting work late. You are starting to feel unsure whether you can succeed 
+      in the program.
+    </p>
+    <p class="scenario-text" style="margin-top: 12px;">
+      You decided to ask an AI assistant for help. You will now read an AI-generated 
+      response to this situation.
+    </p>
+  </div>
+
+  <!-- Response -->
+  <div class="response-card">
+    <div class="response-header">
+      <div class="ai-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 
+          10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 
+          0h-2V8h2v8z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="response-header-text">Response</div>
+        <div class="response-header-sub">Please read carefully before rating</div>
+      </div>
+    </div>
+
+    <div class="response-body">
+      <p>What you are describing is tough, but also very common, especially in 
+      demanding graduate seminars where the workload is heavy and loosely structured. 
+      The situation is not fixed yet, but it will keep getting worse if you try to 
+      just push through without changing anything. The next step is not trying harder; 
+      it is changing your approach and getting support in place.</p>
+
+      <p>Start by talking to someone in your program now, not later. That could be 
+      your seminar professor, your advisor, or even a graduate coordinator. You do 
+      not need to overshare, but being honest that you are falling behind and trying 
+      to get back on track can open doors: extensions, prioritization advice, or even 
+      just clarity on what matters most. Professors usually respond better to early 
+      communication than silence followed by late work.</p>
+
+      <p>At the same time, you need to externalize structure, because ADHD makes it much 
+      harder to rely on internal motivation and memory. Break readings and assignments 
+      into very small, concrete steps and schedule them in a way that is hard to 
+      ignore. Instead of "do the reading," try "read 5 pages at 10am" or "write 3 
+      bullet points at 2pm." It may feel overly simple, but that is the point: 
+      reduce friction.</p>
+
+      <p>You should also look into campus support. Most universities have disability 
+      or accessibility services that can provide accommodations for ADHD, such as 
+      extended deadlines, note-taking support, or flexible pacing. If you are not 
+      already connected with them, that is a practical step that can make a real 
+      difference.</p>
+
+      <p>Finally, challenge the assumption that falling behind means you cannot 
+      succeed. Right now you are reacting to a system that does not fit how you work 
+      best. With the right adjustments, including support, structure, and 
+      communication, you can still turn this around. Waiting and hoping it fixes 
+      itself is the one option that almost guarantees it will not.</p>
+    </div>
+  </div>
+
+  <!-- Return button -->
+  <div class="return-section">
+    <a href="YOUR_QUALTRICS_SURVEY_LINK_HERE" class="return-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8 
+        8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+      Return to Survey
+    </a>
+    <p class="return-hint">After clicking, please answer the rating questions about this response.</p>
+  </div>
+
+</body>
+</html>
+```

@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Response B</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f0f2f5;
+      --surface: #ffffff;
+      --border: #d0d5dd;
+      --text-primary: #111827;
+      --text-secondary: #374151;
+      --text-label: #6b7280;
+      --accent: #2d6a4f;
+      --accent-light: #e8f4ee;
+      --section-header-bg: #f8f9fa;
+      --divider: #d0d5dd;
+      --radius: 12px;
+      --shadow: 0 2px 12px rgba(0,0,0,0.09);
+    }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px 60px;
+    }
+
+    /* ── Header ── */
+    .header {
+      width: 100%;
+      max-width: 720px;
+      margin-bottom: 28px;
+    }
+
+    .study-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+      margin-bottom: 16px;
+    }
+
+    .study-badge::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .header h1 {
+      font-family: 'Nunito', sans-serif;
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--text-primary);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* ── Scenario card ── */
+    .scenario-card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-label);
+      margin-bottom: 10px;
+    }
+
+    .scenario-text {
+      font-family: 'Nunito', sans-serif;
+      font-size: 15.5px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      font-style: italic;
+    }
+
+    .scenario-text + .scenario-text {
+      margin-top: 12px;
+    }
+
+    /* ── Response card ── */
+    .response-card {
+      width: 100%;
+      max-width: 720px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      margin-bottom: 32px;
+    }
+
+    .response-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-bottom: 1px solid var(--border);
+      background: #fafaf8;
+    }
+
+    .ai-icon {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .ai-icon svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    .response-header-text {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .response-header-sub {
+      font-size: 12px;
+      color: var(--text-label);
+    }
+
+    /* ── Split sections ── */
+    .section-validation {
+      padding: 28px 28px 24px;
+      border-bottom: 2px solid var(--divider);
+    }
+
+    .section-steps {
+      padding: 24px 28px 28px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--accent-light);
+    }
+
+    /* Validation text */
+    .validation-text {
+      font-size: 15.5px;
+      line-height: 1.85;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+
+    /* Steps list */
+    .steps-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--accent);
+      color: white;
+      font-size: 13px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+
+    .step-content {
+      flex: 1;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .step-body {
+      font-size: 15px;
+      line-height: 1.8;
+      color: var(--text-secondary);
+      font-weight: 400;
+    }
+
+    /* ── Return button ── */
+    .return-section {
+      width: 100%;
+      max-width: 720px;
+      text-align: center;
+    }
+
+    .return-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: white;
+      font-family: 'Nunito', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      padding: 14px 32px;
+      border-radius: 100px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 4px 14px rgba(45,106,79,0.25);
+    }
+
+    .return-btn:hover {
+      background: #235c41;
+      transform: translateY(-1px);
+    }
+
+    .return-btn svg {
+      width: 16px;
+      height: 16px;
+      fill: white;
+    }
+
+    .return-hint {
+      font-size: 13px;
+      color: var(--text-label);
+      margin-top: 12px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .section-validation { padding: 20px 20px 18px; }
+      .section-steps { padding: 18px 20px 20px; }
+      .scenario-card { padding: 20px; }
+      .step-body { font-size: 14.5px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="study-badge">Response B</div>
+    <h1>Response B</h1>
+    <p>Please read the response below carefully. After reviewing it, return to the survey to answer the questions.</p>
+  </div>
+
+  <!-- Scenario -->
+  <div class="scenario-card">
+    <div class="card-label">Scenario</div>
+    <p class="scenario-text">
+      You are a graduate student with ADHD who has been struggling to keep up with
+      coursework in a seminar. You want to do well, but you keep missing readings and
+      submitting work late. You are starting to feel unsure whether you can succeed
+      in the program.
+    </p>
+    <p class="scenario-text">
+      You decided to ask an AI assistant for help. You will now read an AI-generated
+      response to this situation.
+    </p>
+  </div>
+
+  <!-- Response card -->
+  <div class="response-card">
+
+    <!-- Response header -->
+    <div class="response-header">
+      <div class="ai-icon">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10
+          10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4
+          0h-2V8h2v8z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="response-header-text">Response</div>
+        <div class="response-header-sub">Please read carefully before rating</div>
+      </div>
+    </div>
+
+    <!-- Section 1: Validation -->
+    <div class="section-validation">
+      <div class="section-label">How you are feeling</div>
+      <p class="validation-text">
+        What you are describing is tough and also very common, especially in demanding
+        graduate seminars where the workload is heavy and loosely structured. The situation
+        is not fixed yet, but it will keep getting worse if you try to push through without
+        changing anything. The next step is not trying harder; it is changing your approach
+        and getting support in place.
+      </p>
+    </div>
+
+    <!-- Section 2: Steps -->
+    <div class="section-steps">
+      <div class="section-label">What to do next</div>
+      <ol class="steps-list">
+
+        <li class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <div class="step-title">Talk to someone in your program now, not later.</div>
+            <div class="step-body">That could be your seminar professor, your advisor, or
+            a graduate coordinator. You do not need to overshare, but being honest that you
+            are falling behind and trying to get back on track can open doors, such as
+            extensions, prioritization advice, or clarity on what matters most. Professors
+            usually respond better to early communication than silence followed by late work.
+            </div>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <div class="step-title">Externalize your structure.</div>
+            <div class="step-body">ADHD makes it much harder to rely on internal motivation
+            and memory. You need to externalize structure by breaking readings and assignments
+            into very small, concrete steps and scheduling them in a way that is hard to
+            ignore. Instead of "do the reading," try "read 5 pages at 10am" or "write 3
+            bullet points at 2pm." It may feel overly simple, but that is the point:
+            reduce friction.
+            </div>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <div class="step-title">Look into campus support.</div>
+            <div class="step-body">Most universities have disability or accessibility
+            services that can provide accommodations for ADHD, such as extended deadlines,
+            note-taking support, or flexible pacing. If you are not already connected with
+            them, that is a practical step that can make a real difference.
+            </div>
+          </div>
+        </li>
+
+        <li class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-content">
+            <div class="step-title">Reframe your situation.</div>
+            <div class="step-body">Challenge the assumption that falling behind means you
+            cannot succeed. Right now you are reacting to a system that does not fit how
+            you work best. With the right adjustments, including support, structure, and
+            communication, you can still turn this around. Waiting and hoping it fixes
+            itself is the one option that almost guarantees it will not.
+            </div>
+          </div>
+        </li>
+
+      </ol>
+    </div>
+
+  </div>
+
+  <!-- Return button -->
+  <div class="return-section">
+    <a href="YOUR_QUALTRICS_SURVEY_LINK_HERE" class="return-btn">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M20 11H7.83l5.59-5.59L12 4l-8
+        8 8 8 1.41-1.41L7.83 13H20v-2z"/>
+      </svg>
+      Return to Survey
+    </a>
+    <p class="return-hint">After clicking, please answer the rating questions about this response.</p>
+  </div>
+
+</body>
+</html>
